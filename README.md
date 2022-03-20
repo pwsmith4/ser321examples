@@ -19,7 +19,7 @@ Others were developed by Dr. Mehlhase, David Clements and Aman Kaushik.
 The examples should all have Gradle files. The separate folders have a Gradle project but the "inner" folders also have separate Gradle files. Please check the comments and files so you know how to run the examples. 
 
 ## Suggestions
-If you find any issues or have suggestions on how to improve the repo, the Gradle files etc. feel free to let us know. We are happy to accept Pull Requests if you think you come up with something good. g
+If you find any issues or have suggestions on how to improve the repo, the Gradle files etc. feel free to let us know. We are happy to accept Pull Requests if you think you come up with something good.
 
 ## Have fun
 
