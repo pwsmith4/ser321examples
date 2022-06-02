@@ -242,12 +242,15 @@ class WebServer {
           query_pairs = splitQuery(request.replace("github?", ""));
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
           System.out.println(json);
-          builder.append(json);
-
-          builder.append("Check the todos mentioned in the Java source file");
-          try{
-            //String ownerName = String.parseString()
+          while(query_pairs.get("full_name") != null) {
+            String ownerName = query_pairs.get("login");
+            String full_name = query_pairs.get("full_name");
+            Integer id = Integer.parseInt(query_pairs.get("id"));
+            builder.append("Owner: " + ownerName);
+            builder.append(full_name);
+            builder.append("id: " + id + "\n");
           }
+          builder.append("Check the todos mentioned in the Java source file");
         //1  JSONObject newObject = new JSONObject(json1);
           //JSONArray ownerName = new JSONArray(newObject.getJSONArray(""));
           //1JSONArray repoArray = new JSONArray(newObject.getJSONArray("RepoName"));
