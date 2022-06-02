@@ -241,7 +241,7 @@ class WebServer {
           Map<String, String> query_pairs = new LinkedHashMap<String, String>();
           query_pairs = splitQuery(request.replace("github?", ""));
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
-          System.out.println(json);
+          //System.out.println(json);
           while(query_pairs.get("full_name") != null) {
             String ownerName = query_pairs.get("login");
             String full_name = query_pairs.get("full_name");
