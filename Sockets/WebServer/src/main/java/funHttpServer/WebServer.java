@@ -197,14 +197,25 @@ class WebServer {
           // This multiplies two numbers, there is NO error handling, so when
           // wrong data is given this just crashes
 
-          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+          Map<String, String> query_pairs = new LinkedHashMap<Int, Int>();
           // extract path parameters
           query_pairs = splitQuery(request.replace("multiply?", ""));
 
+          if(request == null){
+            builder.append("HTTP/1.1 400 Bad Request\n");
+            builder.append("Please provide numbers to multiply.");
+            return;
+          }
           // extract required fields from parameters
-          Integer num1 = Integer.parseInt(query_pairs.get("num1"));
-          Integer num2 = Integer.parseInt(query_pairs.get("num2"));
-
+          try {
+            Integer num1 = Integer.parseInt(query_pairs.get("num1"));
+            Integer num2 = Integer.parseInt(query_pairs.get("num2"));
+          }catch(NumberFormatException e){
+            builder.append("HTTP/1.1 400 Bad Request\n");
+            builder.append("Please provide two numbers to multiply\n");
+            builder.append("\n");
+            return;
+            }
           // do math
           Integer result = num1 * num2;
 
@@ -218,6 +229,8 @@ class WebServer {
           // a response that makes sense
 
         } else if (request.contains("github?")) {
+          //builder.append("Hi");
+          //return builder.toString().getBytes();
           // pulls the query from the request and runs it with GitHub's REST API
           // check out https://docs.github.com/rest/reference/
           //
@@ -225,13 +238,23 @@ class WebServer {
           //     then drill down to what you care about
           // "Owner's repo is named RepoName. Example: find RepoName's contributors" translates to
           //     "/repos/OWNERNAME/REPONAME/contributors"
-
           Map<String, String> query_pairs = new LinkedHashMap<String, String>();
           query_pairs = splitQuery(request.replace("github?", ""));
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
           System.out.println(json);
+          builder.append(json);
 
           builder.append("Check the todos mentioned in the Java source file");
+          try{
+            //String ownerName = String.parseString()
+          }
+        //1  JSONObject newObject = new JSONObject(json1);
+          //JSONArray ownerName = new JSONArray(newObject.getJSONArray(""));
+          //1JSONArray repoArray = new JSONArray(newObject.getJSONArray("RepoName"));
+
+         // String user = String.parseString(query_pairs.get("num1"));
+          //Int ownerId = Integer.parseInt(query_pairs.get("num2"));
+          //String repo = String.parseString(query_pairs.get("num3"));
           // TODO: Parse the JSON returned by your fetch and create an appropriate
           // response
           // and list the owner name, owner id and name of the public repo on your webpage, e.g.
